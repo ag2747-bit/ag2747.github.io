@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tax Processor</title>
+        <!--Name: Alyssa Gupta
+        section: 01
+        On my honor, I have neither received nor given any unauthorized assistance
+on this assignment.-->
+<script>
+    // decalre the variables 
+    function processResult() {
+
+        var income;
+        var dependents;
+        var deductions;
+        var state;
+        var adjustedIncome;
+        var taxRate;
+        var taxOwed;
+        var message;
+        // get values from text boxes 
+        income = Number(incomeBox.value);
+        dependents = Number(dependentsBox.value);
+        deductions = Number(deductionsBox.value);
+
+        // converting state var to upper case
+        state = state.toUpperCase();
+
+        //determine tax rate based on the state 
+        if (njRadio.checked) {
+            state = "NJ";
+            taxRate = 0.07;
+        }
+        else if (nyRadio.checked) {
+            state = "NY";
+            taxRate = 0.08;
+        }
+        else if (ctRadio.checked) {
+            state = "CT";
+            taxRate = 0.05;
+        }
+
+         // Calculate adjusted income 
+        adjustedIncome = income - dependents * 2500 - deductions;
+
+        // calculate tax owed 
+        taxOwed = adjustedIncome * taxRate;
+
+        // message output 
+        message = "The" + state + "tax amount you owe based on your adjusted income of $" + 
+        adjustedIncome.toFixed(2) + "is: $" + taxOwed.toFixed(2);
+
+        // display the result 
+        resultBox.value = message;
+            
+    }
+    
+</script>
+    </head>
+    <body style="background-color: blue; color: white; font-size: 20px;">
+        <h1 style="color: lightgreen;">Tax processing</h1>
+
+
+        Income: $
+        <input type="text" id="incomeBox">
+        <br><br>
+
+        Number of dependants:
+        <input type="text" id="dependentsBox">
+        <br><br>
+
+        Other deductions: $
+        <input type="text" id="deductionsBox">
+        <br><br>
+
+        State: 
+        NJ <input type="radio" id="njRadio" name="state">
+        NJ <input type="radio" id="nyRadio" name="state">
+        CT <input type="radio" id="ctRadio" name="state">
+
+        <br><br>
+
+        <button onclick="processResult()">Process</button>
+
+        <br><br>
+
+        Result:
+        <input type="text" id="resultBox" size="80">
+
+    </body>
+</html>
